@@ -18,6 +18,11 @@
   {
     "repository"  : "yashsonawane/vendor_interfaces",
     "target_path" : "vendor/interfaces",
+    "branch"      : "10"
+  },
+  {
+    "repository"  : "yashsonawane/device_oneplus_common",
+    "target_path" : "device/oneplus/common",
     "branch"      : "ten"
   },
   {
