@@ -20,6 +20,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/oneplus/sdm845-common/sdm845-common-vendor.mk)
 
+# Inherit packages from vendor/addons/google/camera
+$(call inherit-product-if-exists, vendor/addons/google/camera/config.mk)
+
+# Inherit packages from vendor/addons/oneplus/camera
+$(call inherit-product-if-exists, vendor/addons/oneplus/camera/config.mk)
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
@@ -102,6 +108,7 @@ PRODUCT_COPY_FILES += \
 
 # Common init scripts
 PRODUCT_PACKAGES += \
+    init.opcamera.rc \
     init.qcom.rc \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
@@ -165,7 +172,8 @@ PRODUCT_PACKAGES += \
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    device/oneplus/common
 
 # Telephony
 PRODUCT_PACKAGES += \

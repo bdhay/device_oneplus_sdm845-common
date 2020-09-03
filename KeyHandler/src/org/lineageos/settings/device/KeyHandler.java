@@ -33,7 +33,7 @@ import vendor.oneplus.camera.CameraHIDL.V1_0.IOnePlusCameraProvider;
 
 public class KeyHandler implements DeviceKeyHandler {
     private static final String TAG = KeyHandler.class.getSimpleName();
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     // Slider key codes
     private static final int MODE_NORMAL = 601;
@@ -41,7 +41,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int MODE_SILENCE = 603;
 
     public static final String CLIENT_PACKAGE_NAME = "com.oneplus.camera";
-    public static final String CLIENT_PACKAGE_PATH = "/data/misc/aosp/client_package_name";
+    public static final String CLIENT_PACKAGE_PATH = "/data/misc/havoc/client_package_name";
 
     private final Context mContext;
     private final AudioManager mAudioManager;
@@ -76,6 +76,7 @@ public class KeyHandler implements DeviceKeyHandler {
         mContext.registerReceiver(mSystemStateReceiver, systemStateFilter);
 
         isOPCameraAvail = PackageUtils.isAvailableApp("com.oneplus.camera", context);
+ Log.i(TAG, "OPCamera is "+isOPCameraAvail);
         if (isOPCameraAvail) {
             mClientObserver = new ClientPackageNameObserver(CLIENT_PACKAGE_PATH);
             mClientObserver.startWatching();
@@ -84,7 +85,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
     public KeyEvent handleKeyEvent(KeyEvent event) {
         int scanCode = event.getScanCode();
-
+ Log.i(TAG, "Key Event "+scanCode);
         switch (scanCode) {
             case MODE_NORMAL:
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
